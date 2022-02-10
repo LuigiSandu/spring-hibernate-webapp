@@ -1,0 +1,26 @@
+
+
+#container {
+	display: inline-block;
+	margin-top:200px;
+	margin-left:300px;
+}
+table {
+	font-size: 20px;
+}
+
+.inputFields {
+	width: 150px;
+	border: 1px solid #666;
+	border-radius: 5px;
+	padding: 4px;
+	font-size: 16px;
+}
+
+
+.button {
+	width: 150px;
+	text-align: center;
+	font-size: 16px;
+}
+

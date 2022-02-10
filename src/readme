@@ -1,0 +1,17 @@
+
+
+-implement delete from the database, not only the view (done)
+-instead of cart button, add an dropdown with account - > cart, account - > details(done)
+-check for improvements in the controllers
+-check for any other dao implementations in the accountservice(working on it)
+-implement order(done)
+-implement sign out button(done)
+-implement update(done)
+Fixes:
+		-user can log in with password from another account; check AccountController
+use one method: if the username is found in the database get that entry and check password(done)
+	   -if instead of try and catch in accountdaoImpl
+Issues: can't order after first time you create account, account.id will be null(done)	 
+
+controllers done  
+	   
