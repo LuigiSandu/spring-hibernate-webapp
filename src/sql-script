@@ -1,0 +1,219 @@
+DROP DATABASE IF EXISTS `spring-final`;
+CREATE DATABASE `spring-final`;
+USE `spring-final`;
+CREATE TABLE `account`(
+`id` int NOT NULL AUTO_INCREMENT,
+`account_username` varchar(128) NOT NULL,
+`account_password` varchar(128) NOT NULL,
+`account_email` varchar(128) NOT NULL,
+UNIQUE (`account_username`,`account_email`),
+PRIMARY KEY(`id`)
+);
+
+
+CREATE TABLE `cart`(
+`id` int NOT NULL AUTO_INCREMENT,
+
+PRIMARY KEY(`id`)
+);
+
+ALTER TABLE account
+ADD COLUMN `cart_id` int; 
+ALTER TABLE `account`
+ADD CONSTRAINT `FK_cart` FOREIGN KEY (`cart_id`) REFERENCES `cart`(`id`);
+
+CREATE TABLE `credential`(
+`id` int NOT NULL AUTO_INCREMENT,
+`card_number` VARCHAR(20) NOT NULL,
+`cvc` varchar(4) NOT NULL, 
+PRIMARY KEY(`id`)
+);
+ALTER TABLE `credential`
+ADD COLUMN `account_id` int; 
+ALTER TABLE `credential`
+ADD FOREIGN KEY (`account_id`) REFERENCES `account`(`id`);
+
+CREATE TABLE `cpu`(
+`id` int NOT NULL AUTO_INCREMENT,
+`description` VARCHAR(256) NOT NULL,
+PRIMARY KEY (`id`)
+);
+
+
+
+
+CREATE TABLE `gpu`(
+`id` int NOT NULL AUTO_INCREMENT,
+`description` VARCHAR(256) NOT NULL,
+PRIMARY KEY (`id`)
+);
+
+
+
+CREATE TABLE `hdd`(
+`id` int NOT NULL AUTO_INCREMENT,
+`description` VARCHAR(256) NOT NULL,
+PRIMARY KEY (`id`)
+);
+
+
+
+
+
+CREATE TABLE `psu`(
+`id` int NOT NULL AUTO_INCREMENT,
+`description` VARCHAR(256) NOT NULL,
+PRIMARY KEY (`id`)
+);
+
+
+
+CREATE TABLE `placed_order`(
+`id` int NOT NULL AUTO_INCREMENT,
+`account_id` int NOT NULL,
+`credential_id` int NOT NULL,
+PRIMARY KEY(`id`)
+)ENGINE = InnoDB CHARSET=latin1;
+ALTER TABLE `placed_order`
+ADD CONSTRAINT `FK_order_account` FOREIGN KEY (`account_id`) REFERENCES `account`(`id`);
+ALTER TABLE `placed_order`
+ADD CONSTRAINT `FK_order_credential` FOREIGN KEY (`credential_id`) REFERENCES `credential`(`id`);
+
+
+CREATE TABLE `item_list`(
+`id` int NOT NULL AUTO_INCREMENT,
+`cart_id` int,
+`placed_order_id` int,
+PRIMARY KEY(`id`)
+)ENGINE = InnoDB CHARSET=latin1;
+
+ALTER TABLE `item_list`
+ADD CONSTRAINT `FK_cart_items` FOREIGN KEY (`cart_id`) REFERENCES `cart`(`id`);
+
+ALTER TABLE `item_list`
+ADD CONSTRAINT `FK_placedorder_items` FOREIGN KEY (`placed_order_id`) REFERENCES `placed_order`(`id`);
+
+
+CREATE TABLE `item_list_cpu`(
+`item_list_id` int NOT NULL,
+`cpu_id` int NOT NULL
+
+) ENGINE = InnoDB CHARSET=latin1;
+
+ALTER TABLE `item_list_cpu`
+ADD CONSTRAINT `FK_ilcpu_01` FOREIGN KEY (`item_list_id`) REFERENCES `item_list`(`id`);
+
+ALTER TABLE `item_list_cpu`
+ADD CONSTRAINT `FK_ilcpu_02` FOREIGN KEY (`cpu_id`) REFERENCES `cpu`(`id`);
+
+
+
+CREATE TABLE `item_list_gpu`(
+`item_list_id` int NOT NULL,
+`gpu_id` int NOT NULL
+
+) ENGINE = InnoDB CHARSET=latin1;
+
+ALTER TABLE `item_list_gpu`
+ADD CONSTRAINT `FK_ilgpu_01` FOREIGN KEY (`item_list_id`) REFERENCES `item_list`(`id`);
+
+ALTER TABLE `item_list_gpu`
+ADD CONSTRAINT `FK_ilgpu_02` FOREIGN KEY (`gpu_id`) REFERENCES `gpu`(`id`);
+
+
+
+CREATE TABLE `item_list_hdd`(
+`item_list_id` int NOT NULL,
+`hdd_id` int NOT NULL
+
+) ENGINE = InnoDB CHARSET=latin1;
+
+ALTER TABLE `item_list_hdd`
+ADD CONSTRAINT `FK_ilhdd_01` FOREIGN KEY (`item_list_id`) REFERENCES `item_list`(`id`);
+
+ALTER TABLE `item_list_hdd`
+ADD CONSTRAINT `FK_ilhdd_02` FOREIGN KEY (`hdd_id`) REFERENCES `hdd`(`id`);
+
+
+
+
+
+CREATE TABLE `item_list_psu`(
+`item_list_id` int NOT NULL,
+`psu_id` int NOT NULL
+
+) ENGINE = InnoDB CHARSET=latin1;
+
+ALTER TABLE `item_list_psu`
+ADD CONSTRAINT `FK_ilpsu_01` FOREIGN KEY (`item_list_id`) REFERENCES `item_list`(`id`);
+
+ALTER TABLE `item_list_psu`
+ADD CONSTRAINT `FK_ilpsu_02` FOREIGN KEY (`psu_id`) REFERENCES `psu`(`id`);
+
+
+
+insert into `cpu` (description) values("CPU AMD Ryzen 5 5600X, 35MB, 4.6GHz, Wraith Stealth");
+insert into `cpu` (description) values("CPU Intel Core i5-10400F Comet Lake, 2.9GHz, 12MB, Socket 1200");
+insert into `cpu` (description) values("CPU Intel Core i5-11400F Rocket Lake, 2.6 GHz, 12MB, Socket 1200");
+insert into `cpu` (description) values("CPU Intel Core i9-12900K Alder Lake, 3.2GHz, 30MB, Socket 1700");
+insert into `cpu` (description) values("CPU Pentium Gold G6405 Comet Lake, 4.10GHz, 4MB, Socket 1200");
+insert into `cpu` (description) values("CPU Core i3-10105F Comet Lake, 3.70GHz, 6MB, socket 1200, Box");
+insert into `cpu` (description) values("CPU AMD Ryzen 7 5700G, 20MB, 3.8GHz, Socket AM4, Wraith Stealth");
+insert into `cpu` (description) values("CPU Intel Core i9-11900K Rocket Lake, 3.50 GHz, 16MB, Socket 1200");
+insert into `cpu` (description) values("CPU Intel Core i3-10100 Comet Lake, 3.6GHz, 6MB, Socket 1200");
+insert into `cpu` (description) values("CPU Intel Core i5-11600K Rocket Lake, 3.90 GHz, 12MB, Socket 1200");
+
+
+insert into `gpu` (description) values("GPU EVGA GeForce RTX 3080 FTW3 ULTRA GAMING LHR, 10GB GDDR6X, 320-bit");
+insert into `gpu` (description) values("GPU Powercolor Radeon RX 6600 Fighter, 8GB GDDR6, 128-bit");
+insert into `gpu` (description) values("GPU Palit GeForce RTX 3070 Ti GameRock LHR, 8GB GDDR6X, 256-bit");
+insert into `gpu` (description) values("GPU Dual GeForce GTX 1650 MINI OC, 4GB GDDR6, 128-bit");
+insert into `gpu` (description) values("GPU ASUS TUF Gaming Radeon RX 6500 XT OC, 4GB GDDR6, 64-bit");
+insert into `gpu` (description) values("GPU Gigabyte AORUS GeForce RTX 3060 2.0 LHR, 12GB GDDR6, 192-bit");
+insert into `gpu` (description) values("GPU XFX Radeon RX 6700 XT SPEEDSTER QICK 319 Black, 12GB GDDR6, 192-bit");
+insert into `gpu` (description) values("GPU ASUS ROG Strix LC Radeon RX 6900 XT, 16GB GDDR6, 256-bit");
+insert into `gpu` (description) values("GPU Gigabyte GeForce RTX 3060 Ti GAMING OC 2.0 LHR, 8GB GDDR6, 256-bit");
+insert into `gpu` (description) values("GPU MSI GeForce RTX 3060 Ti VENTUS 3X OC LHR, 8GB GDDR6, 256-bit");
+
+
+insert into `hdd` (description) values("HDD Seagate SkyHawk Surveillance 2TB, 256MB cache, SATA-III");
+insert into `hdd` (description) values("HDD Seagate IronWolf NAS 1TB, 5900rpm, 64MB cache, SATA-III");
+insert into `hdd` (description) values("HDD WD Red™ Plus 2TB, 5400RPM, 128MB cache, SATA-III");
+insert into `hdd` (description) values("HDD Seagate BarraCuda 4TB, 5400rpm, 256MB cache, SATA-III");
+insert into `hdd` (description) values("HDD Seagate IronWolf NAS 2TB, 5900rpm, 64MB cache, SATA-III");
+insert into `hdd` (description) values("HDD Seagate IronWolf Pro NAS 6TB, 7200rpm, 256MB cache, SATA-III");
+
+insert into `psu` (description) values("PSU Corsair CV Series CV650, 80 PLUS Bronze, 650W, Dual EPS");
+insert into `psu` (description) values("PSU Corsair CV Series CV550, 80 Plus Bronze, 550 W, Negru");
+insert into `psu` (description) values("PSU Gigabyte P850GM, 80 PLUS Gold, 850W, PFC Activ, Fully Modular");
+insert into `psu` (description) values("PSU Corsair CX Series CX650F RGB, 80 PLUS Bronze, 650W, Fully Modular");
+insert into `psu` (description) values("PSU Corsair RMx Series RM850x, 80 PLUS Gold, 850W, Fully Modular");
+insert into `psu` (description) values("PSU Corsair CX Series CX750F RGB White, 80 PLUS Bronze, 750W, Fully Modular");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

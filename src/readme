@@ -1,4 +1,5 @@
 
+
 1.Defining packaging structure:
 		1.1 Go to project properties -> Deployment Assembly and delete the existing sources
 		1.2 Press on the add button - > folder - > src
@@ -11,8 +12,6 @@
 		1.4 Pick the appropiate Java version you have installed.
 		1.5 Go to Runtimes and pick a new runtime/ create a new one.
 3.Change the database name, user and password from the "spring-mvc-crud-demo-servlet.xml" 	
-
-
 
 Installing lombok: 
 		1.Download : https://projectlombok.org/download 
