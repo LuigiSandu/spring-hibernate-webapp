@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>SignInPage</title>
+<title>Log in</title>
 <link type = "text/css"
 	  rel = "stylesheet"
 	  href="${pageContext.request.contextPath}/resources/css/style.css">
@@ -10,7 +10,7 @@
 <body>
 <div class = "main">
 	<div id = "container">
-			<h3>Sign In</h3>
+			<h3>Log in</h3>
 			<form:form action = "logIn" modelAttribute = "account" method = "POST">
 				<table>
 					<tbody>

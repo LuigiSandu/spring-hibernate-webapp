@@ -3,13 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>SignInPage</title>
+<title>HDDs</title>
 <link type = "text/css"
 	  rel = "stylesheet"
 	  href="${pageContext.request.contextPath}/resources/css/temp.css">
-<style>
-
-</style>
 </head>
 <body>
 

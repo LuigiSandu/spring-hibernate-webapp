@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>SignInPage</title>
+<title>Log In</title>
  
 <link type = "text/css"
 	  rel = "stylesheet"
@@ -12,7 +12,7 @@
 <body>
 <div class = "main">
 	<div id = "container">
-		<h3>Sign In</h3>
+		<h3>Log In</h3>
 		<form:form action = "logIn" modelAttribute = "account" method = "POST">
 			<!--  need to associate this data with customer id -->
 			<form:hidden path = "id"/>

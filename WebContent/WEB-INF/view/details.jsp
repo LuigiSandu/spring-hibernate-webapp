@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>SignInPage</title>
+<title>Details</title>
 <link type = "text/css"
 	  rel = "stylesheet"
 	  href="${pageContext.request.contextPath}/resources/css/temp.css">
